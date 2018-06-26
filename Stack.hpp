@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 13:45:38 by mafernan          #+#    #+#             */
-/*   Updated: 2018/06/25 14:46:25 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/06/26 13:38:34 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ class Stack {
 		};
 
 		// My Stack should not allow copy of entire stack
-		Stack(const Stack& lhs) {}
+		Stack(const Stack& lhs) {
+			(void)lhs;
+		}
 
 		// My Stack should not allow assignment of one stack to another
-		Stack& operator=(const Stack& rhs) {}
+		Stack& operator=(const Stack& rhs) {
+			(void)rhs;
+		}
 		StackNode *top;                 // top of stack
 
 };
