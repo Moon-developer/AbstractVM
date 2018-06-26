@@ -6,17 +6,17 @@
 #    By: nfruneau <nfruneau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 15:56:35 by nfruneau          #+#    #+#              #
-#    Updated: 2018/06/22 15:17:20 by mafernan         ###   ########.fr        #
+#    Updated: 2018/06/26 13:37:19 by mafernan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 COM = clang++
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -std=c++11 -Wall -Werror -Wextra
 
 NAME = avm
 
-SRC = Main.cpp
+SRC = Main.cpp IOperand.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
