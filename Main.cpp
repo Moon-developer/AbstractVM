@@ -6,11 +6,16 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/02 11:29:21 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/02 14:49:43 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Main.hpp"
+#include <limits.h>
+#include <cfloat>
+#include <iomanip>
+#include <cmath>
+
 
 // return a vector of words to loop thru
 std::vector<std::string>	splitspace(std::string input)
@@ -88,14 +93,39 @@ void	validate(std::string & input, std::string* & cmds)
 }
 
 // check if function has overflow or underflow
-void	check_OUflow(std::string func, std::string num)
+void	CheckOUFlow(std::string func, std::string num)
 {
-	if (func == "int8")
-	{
-		if (num.size() < 4)
-			throw Error::UnderflowError();
-		if (num.size() > 4)
+	long double size = std::stold(num);
+
+	if (func == "int8") {
+		if (size > INT8_MAX)
 			throw Error::OverflowError();
+		if (size < INT8_MIN)
+			throw Error::UnderflowError();
+	}
+	else if (func == "int16") {
+		if (size > INT16_MAX)
+			throw Error::OverflowError();
+		if (size < INT16_MIN)
+			throw Error::UnderflowError();
+	}
+	else if (func == "int32") {
+		if (size > INT32_MAX)
+			throw Error::OverflowError();
+		if (size < INT32_MIN)
+			throw Error::UnderflowError();
+	}
+	else if (func == "float") {
+		if (size > FLT_MAX)
+			throw Error::OverflowError();
+		if (std::fabsl(size) < FLT_MIN && std::fabsl(size) > 0)
+			throw Error::UnderflowError();
+	}
+	else if (func == "double") {
+		if (size > DBL_MAX)
+			throw Error::OverflowError();
+		if (std::fabsl(size) < DBL_MIN && std::fabsl(size) > 0)
+			throw Error::UnderflowError();
 	}
 }
 
@@ -122,7 +152,7 @@ void	loop(void)
 				std::cout << "reg cmd : " + input << std::endl;
 			if (cmds[3] == "push/assert")
 			{
-				check_OUflow(cmds[1], cmds[2]);
+				CheckOUFlow(cmds[1], cmds[2]);
 				std::cout << "adv cmd : " + input << std::endl;
 			}
 			if (cmds[3] == "end")

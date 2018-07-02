@@ -6,7 +6,7 @@
 #    By: nfruneau <nfruneau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 15:56:35 by nfruneau          #+#    #+#              #
-#    Updated: 2018/06/26 13:37:19 by mafernan         ###   ########.fr        #
+#    Updated: 2018/07/02 12:54:27 by mafernan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -36,3 +36,6 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
+
+list:
+	@grep '^[^#[:space:]].*:' Makefile
