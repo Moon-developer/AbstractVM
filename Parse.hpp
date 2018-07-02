@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Main.hpp                                           :+:      :+:    :+:   */
+/*   Parse.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/22 09:31:00 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/02 15:08:49 by mafernan         ###   ########.fr       */
+/*   Created: 2018/07/02 14:58:51 by mafernan          #+#    #+#             */
+/*   Updated: 2018/07/02 15:08:40 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_HPP
-# define MAIN_HPP
+#ifndef PARSE_HPP
+# define PARSE_HPP
 
-# include "IOperand.hpp"
-# include "Parse.hpp"
+
+# include <limits.h>
+# include <cfloat>
+# include <cmath>
+# include <iostream>
+# include <vector>
+# include <sstream>
+# include <regex>
+# include "Error.hpp"
+
+std::vector<std::string>	splitspace(std::string input);
+
+int		remove_comment(std::string & input);
+void	validate(std::string & input, std::string* & cmds);
+void	CheckOUFlow(std::string func, std::string num);
 
 #endif
