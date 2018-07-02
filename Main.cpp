@@ -6,110 +6,143 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/06/26 15:36:55 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/02 11:29:21 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Main.hpp"
-#include "Stack.hpp"
-#include <vector>
-#include <sstream>
 
-template < typename P >
-void print( std::stack<P>& stk ) {
-	struct cheat : std::stack<P> {
-		using std::stack<P>::c; 
-	};
-	auto& seq = static_cast< cheat& >(stk).c;
-
-	for( auto& v : seq )
-		std::cout << v.getvalue() << std::endl;
-	std::cout << '\n' ;
-}
-
-// retunr a vector of words to loop thru
-std::vector<std::string>	splitspace(std::string input) {
+// return a vector of words to loop thru
+std::vector<std::string>	splitspace(std::string input)
+{
 	std::string					buff;	
 	std::stringstream			ss(input);
 	std::vector<std::string>	words;
 
-	while (ss >> buff) {
+	while (ss >> buff)
 		words.push_back(buff);
-	}
 	return (words);
 }
 
-// return number of words in a string
-int		wordcount(std::string input) {
-	std::string			buff;	
-	std::stringstream	ss(input);
-	int					count;
+// remove comments if any is found and return 0 if exit command/colon is found
+int		remove_comment(std::string & input)
+{
+	size_t exitCol = input.find(";;");					// find exit colon
+	size_t exitCmd = input.find("exit");				// find exit cmd
+	size_t semiC = input.find(";");						// find comments
 
-	std::vector<std::string>	words;
-	while (ss >> buff) {
-		words.push_back(buff);
+	input.erase(0, input.find_first_not_of(' '));		//prefixing spaces
+	input.erase(input.find_last_not_of(' ')+1);			//surfixing spaces
+	input.erase(0, input.find_first_not_of('\t'));		//prefixing tabs
+	input.erase(input.find_last_not_of('\t')+1);		//surfixing tabs
+	if (exitCmd != std::string::npos && input.size() == 4)	// check if exit cmd if found
+		return (0);
+	if (semiC != std::string::npos)
+	{
+		if (exitCol != std::string::npos && input.size() == 2)	// check if exit colon is found
+			return (0);
+		input = input.substr(0, semiC);							// remove any comments
+		input.erase(0, input.find_first_not_of(' '));			//prefixing spaces
+		input.erase(input.find_last_not_of(' ')+1);				//surfixing spaces
+		input.erase(0, input.find_first_not_of('\t'));			//prefixing tabs
+		input.erase(input.find_last_not_of('\t')+1);			//surfixing tabs
+		if (exitCmd != std::string::npos && input.size() == 4)	// check if exit cmd if found
+			return (0);
 	}
-	count = words.size();
-	return (count);
+	return (1);
 }
 
 // check if input options are true
-bool	validate(std::string input) {
-	std::vector<std::string>	cmdlist;	
-	std::string 				types[5] = {"int8", "int16", "int32", "float", "double"};
-	std::string					cmds[9] = {"add", "mul", "pop", "dump", "sub", 
-											"div", "mod", "print", "exit"};
+void	validate(std::string & input, std::string* & cmds) 
+{
+	std::regex		reg("(push|assert) (int8|int16|int32|float|double)\\s?\\(-?[[:digit:]]+(.?[[:digit:]]+)?\\)\\B");
+	std::regex		reg_cmds("add\\b|sub\\b|mod\\b|dump\\b|div\\b|mul\\b|pop\\b|print\\b");
+	std::regex		digits("\\(-?\\d+(.?\\d+)\\)");
+	std::smatch		base_match;
+	std::smatch		value_match;
+	std::string		val;
 
 	std::transform(input.begin(), input.end(), input.begin(), ::tolower);
-	if (wordcount(input) > 2) {
-		std::cout << "Too many arguments or invalid argument type:\n\t" << input << std::endl;
-		return (false);
+	if (remove_comment(input) == 0)
+		cmds[3] = "end";
+	else if (std::regex_match(input, reg_cmds) == true) 
+	{
+		cmds[0] = input;
+		cmds[3] = "reg_cmd";
 	}
-	for (int i = 0; i < 9; i++)
-		if (input == cmds[i])
-			return (true);
-	if (wordcount(input) == 2) {
-		cmdlist = splitspace(input);
-		if (cmdlist[0] == "push" || cmdlist[0] == "assert")
-			return (true);
-		for (int i = 0; i < 5; i++) {
-			for (int n = 0; n < (int)types[i].size(); n++)
-				if (cmdlist[1][n] != types[i][n]) {
-					std::cout << "invalid type :\n - " << cmdlist[1] << std::endl;
-					return (false);
-				}
-		}
+	else if (std::regex_match(input, base_match, reg) == true) 
+	{
+		if (std::regex_search(input, value_match, digits) == true)
+			val = (value_match[0].str()).substr(1, (value_match[0].str()).size() - 2);
+		else
+			throw Error::SyntaxError();
+		cmds[0] = base_match[1].str();
+		cmds[1] = base_match[2].str();
+		cmds[2] = val;
+		cmds[3] = "push/assert";
+		return;
 	}
-	std::cout << "Given input was invalid :\n - " << input << std::endl;
-	return (false);
+	else
+		throw Error::SyntaxError();
+	return;
+}
+
+// check if function has overflow or underflow
+void	check_OUflow(std::string func, std::string num)
+{
+	if (func == "int8")
+	{
+		if (num.size() < 4)
+			throw Error::UnderflowError();
+		if (num.size() > 4)
+			throw Error::OverflowError();
+	}
 }
 
 // loop for all possible inputs
-void	loop(void) {
+void	loop(void) 
+{
 	bool					exit = false;
 	std::string				input;
 	std::string				test;
-	Stack <IOperand>		stk;
-	
-	while (!exit) {
+
+	while (!exit) 
+	{
 		std::getline (std::cin, input);
-		if (input == ";;") {
-			exit = true;
+		try
+		{
+			std::string*	cmds = new std::string[4];
+			validate(input, cmds);
+			if (cmds[3] == "end") {
+				exit = true;
+			}
+			if (cmds[3] == "ignore")
+				std::cout << "comment : " << input << std::endl;
+			if (cmds[3] == "reg_cmd")
+				std::cout << "reg cmd : " + input << std::endl;
+			if (cmds[3] == "push/assert")
+			{
+				check_OUflow(cmds[1], cmds[2]);
+				std::cout << "adv cmd : " + input << std::endl;
+			}
+			if (cmds[3] == "end")
+				std::cout << "reached end with : " + input << std::endl;
+			delete [] cmds;
 		}
-		if (validate(input) == true) {
-			IOperand	IO(input);
-			stk.push(IO);
+		catch (std::exception & e) 
+		{
+			std::cout << e.what() << std::endl;
 		}
 	}
 }
 
 // start vm and look for input file or wait for input
-int		main(int ac, char **av) {
+int		main(int ac, char **av)
+{
 	(void)av;
 	Error error;
-	if (ac > 1) {
+	if (ac > 1)
 		std::cout << "Add file parser here" << std::endl;
-	}
 	else
 		loop();
 	return (0);

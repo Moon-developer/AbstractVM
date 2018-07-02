@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:31:00 by mafernan          #+#    #+#             */
-/*   Updated: 2018/06/25 12:32:52 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/02 11:40:50 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define MAIN_HPP
 
 # include <iostream>
-# include <stack>
+# include <vector>
+# include <sstream>
+# include <regex>
 # include "IOperand.hpp"
 # include "Error.hpp"
 
