@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:50:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/02 15:45:22 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/06 07:19:48 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		remove_comment(std::string & input)
 	if (semiC != std::string::npos)
 	{
 		if (exitCol != std::string::npos && input.size() == 2)	// check if exit colon is found
-			return (0);
+			return (1);
 		input = input.substr(0, semiC);							// remove any comments
 		input.erase(0, input.find_first_not_of(' '));			//prefixing spaces
 		input.erase(input.find_last_not_of(' ')+1);				//surfixing spaces
@@ -49,7 +49,7 @@ int		remove_comment(std::string & input)
 		if (exitCmd != std::string::npos && input.size() == 4)	// check if exit cmd if found
 			return (0);
 	}
-	return (1);
+	return (2);
 }
 
 // check if input options are true
@@ -57,13 +57,13 @@ void	validate(std::string & input, std::string* & cmds)
 {
 	std::regex		reg("(push|assert) (int8|int16|int32|float|double)\\s?\\(-?[[:digit:]]+(.?[[:digit:]]+)?\\)\\B");
 	std::regex		reg_cmds("add\\b|sub\\b|mod\\b|dump\\b|div\\b|mul\\b|pop\\b|print\\b");
-	std::regex		digits("\\(-?\\d+(.?\\d+)\\)");
+	std::regex		digits("-?[[:digit:]]+(.?[[:digit:]]+)?");
 	std::smatch		base_match;
 	std::smatch		value_match;
 	std::string		val;
 
 	std::transform(input.begin(), input.end(), input.begin(), ::tolower);
-	if (remove_comment(input) == 0)
+	if (remove_comment(input) == 0 || remove_comment(input) == 1)
 		cmds[3] = "end";
 	else if (std::regex_match(input, reg_cmds) == true) 
 	{
@@ -82,6 +82,8 @@ void	validate(std::string & input, std::string* & cmds)
 		cmds[3] = "push/assert";
 		return;
 	}
+	else if (input.size() == 0)
+		return ;
 	else
 		throw Error::SyntaxError();
 	return;

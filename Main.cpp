@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/02 15:50:47 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/03 15:07:05 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,33 @@
 #include <iostream>
 #include <fstream>
 
+// return true if exit cmd found for file
+bool	find_exit(std::string file)
+{
+	std::string		line;
+	std::ifstream	input;
+	bool			exit = false;
+
+	try
+	{
+		input.open(file);
+		while (std::getline(input, line))
+			if (remove_comment(line) == 0)
+				exit = true;
+		input.close();
+		if (exit == true)
+			return (true);
+		else
+			throw Error::SyntaxError();
+	}
+	catch (std::exception & e) 
+	{
+		std::cout << e.what() << std::endl;
+		return (false);
+	}
+}
+
+// loop thru each line in the file 
 void	parse_file(std::string file)
 {
 	std::ifstream	input;
@@ -22,6 +49,11 @@ void	parse_file(std::string file)
 	bool			exit = false;
 
 	input.open(file);
+	if (find_exit(file) == false)
+	{
+		std::cout << "No exit command found in "+file << std::endl;
+		return ;
+	}
 	while (std::getline( input, line ) && exit != true)
 	{
 		std::string*	cmds = new std::string[4];
@@ -31,17 +63,15 @@ void	parse_file(std::string file)
 			if (cmds[3] == "end") {
 				exit = true;
 			}
-			else if (cmds[3] == "ignore")
-				std::cout << "comment : " << line << std::endl;
 			else if (cmds[3] == "reg_cmd")
-				std::cout << "reg cmd : " + line << std::endl;
+				std::cout << "run : " + line << std::endl;
 			else if (cmds[3] == "push/assert")
 			{
 				CheckOUFlow(cmds[1], cmds[2]);
-				std::cout << "adv cmd : " + line << std::endl;
+				std::cout << "run : " + line << std::endl;
 			}
 			else if (cmds[3] == "end")
-				std::cout << "reached end with : " + line << std::endl;
+				std::cout << line << std::endl;
 		}
 		catch (std::exception & e) 
 		{
@@ -52,17 +82,15 @@ void	parse_file(std::string file)
 	input.close();
 }
 
+// check if given files is a valid .avm file
 void	read_files(char **files, int total)
 {
-	std::regex	ext("\\w*.(avm)");
-
 	for (int index = 1; index < total; index++)
 	{
-		if (std::regex_match(files[index], ext) == true)
-		{
-			std::cout << "reading : " << files[index] << std::endl;
+		std::string	file = files[index];
+		std::size_t found = file.find(".avm");
+		if (found!=std::string::npos)
 			parse_file(files[index]);
-		}
 		else
 			std::cout << "invalid file : " << files[index] << std::endl;
 	}
@@ -85,17 +113,15 @@ void	loop(void)
 			if (cmds[3] == "end") {
 				exit = true;
 			}
-			if (cmds[3] == "ignore")
-				std::cout << "comment : " << input << std::endl;
 			if (cmds[3] == "reg_cmd")
-				std::cout << "reg cmd : " + input << std::endl;
+				std::cout << "run : " + input << std::endl;
 			if (cmds[3] == "push/assert")
 			{
 				CheckOUFlow(cmds[1], cmds[2]);
-				std::cout << "adv cmd : " + input << std::endl;
+				std::cout << "run : " + input << std::endl;
 			}
 			if (cmds[3] == "end")
-				std::cout << "reached end with : " + input << std::endl;
+				std::cout << input << std::endl;
 			delete [] cmds;
 		}
 		catch (std::exception & e) 
