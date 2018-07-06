@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 10/38/23 by mafernan          #+#    #+#             */
-/*   Updated: 2018/06/25 14:23:56 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/06 07:21:33 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@ class IOperand {
 		std::string _value;
 	public:
 		template<typename IN>
-		IOperand( IN src ) {
-			this->_value = src;
-		}
-		std::string	getvalue() {
-			return this->_value;
-		}
+		IOperand( IN src ) { this->_value = src; }
+		std::string	getvalue() { return this->_value; }
 		~IOperand( void );
 
 

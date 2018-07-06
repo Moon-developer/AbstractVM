@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:50:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/06 07:19:48 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/06 07:22:44 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ std::vector<std::string>	splitspace(std::string input)
 // remove comments if any is found and return 0 if exit command/colon is found
 int		remove_comment(std::string & input)
 {
-	size_t exitCol = input.find(";;");					// find exit colon
-	size_t exitCmd = input.find("exit");				// find exit cmd
-	size_t semiC = input.find(";");						// find comments
+	size_t exitCol = input.find(";;");						// find exit colon
+	size_t exitCmd = input.find("exit");					// find exit cmd
+	size_t semiC = input.find(";");							// find comments
 
-	input.erase(0, input.find_first_not_of(' '));		//prefixing spaces
-	input.erase(input.find_last_not_of(' ')+1);			//surfixing spaces
-	input.erase(0, input.find_first_not_of('\t'));		//prefixing tabs
-	input.erase(input.find_last_not_of('\t')+1);		//surfixing tabs
+	input.erase(0, input.find_first_not_of(' '));			//prefixing spaces
+	input.erase(input.find_last_not_of(' ')+1);				//surfixing spaces
+	input.erase(0, input.find_first_not_of('\t'));			//prefixing tabs
+	input.erase(input.find_last_not_of('\t')+1);			//surfixing tabs
 	if (exitCmd != std::string::npos && input.size() == 4)	// check if exit cmd if found
 		return (0);
 	if (semiC != std::string::npos)
