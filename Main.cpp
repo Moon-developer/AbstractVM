@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/03 15:07:05 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/06 16:36:52 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 // return true if exit cmd found for file
 bool	find_exit(std::string file)
@@ -102,6 +103,7 @@ void	loop(void)
 	bool					exit = false;
 	std::string				input;
 	std::string				test;
+	std::vector<IOperand const *>	stack;
 
 	while (!exit) 
 	{
@@ -118,6 +120,11 @@ void	loop(void)
 			if (cmds[3] == "push/assert")
 			{
 				CheckOUFlow(cmds[1], cmds[2]);
+				Factory	f;
+				IOperand const * op = f.createOperand(eOperandType::int8, cmds[2]);
+				stack.emplace_back(op);
+				delete op;
+				std::cout << "stack size : " << stack.size() << std::endl;
 				std::cout << "run : " + input << std::endl;
 			}
 			if (cmds[3] == "end")
@@ -134,6 +141,8 @@ void	loop(void)
 // start vm and look for input file or wait for input
 int		main(int ac, char **av)
 {
+
+
 	if (ac > 1)
 		read_files(av, ac);
 	else
