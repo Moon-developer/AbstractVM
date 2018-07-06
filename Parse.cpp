@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:50:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/06 07:22:44 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/06 16:16:10 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	validate(std::string & input, std::string* & cmds)
 {
 	std::regex		reg("(push|assert) (int8|int16|int32|float|double)\\s?\\(-?[[:digit:]]+(.?[[:digit:]]+)?\\)\\B");
 	std::regex		reg_cmds("add\\b|sub\\b|mod\\b|dump\\b|div\\b|mul\\b|pop\\b|print\\b");
-	std::regex		digits("-?[[:digit:]]+(.?[[:digit:]]+)?");
+	std::regex		digits("\\(-?\\d+(.?\\d+)?\\)");
 	std::smatch		base_match;
 	std::smatch		value_match;
 	std::string		val;
