@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 10/38/23 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/06 16:34:28 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 09:40:45 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ enum eOperandType {
 
 class IOperand {
 	public:
-//		virtual int getPrecision( void ) const = 0; //Precision of the type of the instance
+		virtual int getPrecision( void ) const = 0; //Precision of the type of the instance
 		virtual eOperandType getType( void ) const = 0; //Type of the instance
 
 	//	virtual IOperand const * operator+( IOperand const & rhs ) const = 0; //Sum
@@ -35,7 +35,7 @@ class IOperand {
 	//	virtual IOperand const * operator/( IOperand const & rhs ) const = 0; //Quotient
 	//	virtual IOperand const * operator%( IOperand const & rhs ) const = 0; //Modulo
 
-	//	virtual std::string const & toString( void ) const = 0; //Str representation of the instance
+		virtual std::string const & toString( void ) const = 0; //Str representation of the instance
 
 		virtual ~IOperand( void ) {};
 };
@@ -46,15 +46,30 @@ class Operand : public IOperand {
 		std::string			_val;
 		eOperandType		_type;
 
-		Operand(std::string val, eOperandType type) : _val(val), _type(type) {};
-		Operand( Operand const & src ) { *this = src; }
-		virtual ~Operand( void ) {};
-
-		virtual eOperandType getType( void ) const {
+		Operand(std::string val, eOperandType type) : _val(val), _type(type) {}; // sets val and type
+		Operand( Operand const & src ) { *this = src; } // copy constructor
+		virtual ~Operand( void ) {}; // deconstructor
+		virtual eOperandType getType( void ) const { // get Type function
 			return (_type);
 		}
-
-		Operand & operator=(Operand const & src) {
+		virtual int getPrecision( void ) const { //Precision of the type of the instance
+			switch (_type) {
+				case int8:
+					return (0);
+				case int16:
+					return (1);
+				case int32:
+					return (2);
+				case FLOAT:
+					return (3);
+				case DOUBLE:
+					return (4);
+			}
+		}
+		virtual std::string const & toString( void ) const { // return a string instance of value
+			return (_val);
+		}
+		Operand & operator=(Operand const & src) { // equal operator
 			if (this != &src) {
 				*this = src;
 			}
