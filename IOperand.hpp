@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 10/38/23 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 09:40:45 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 10:47:43 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <string>
+# include "Factory.hpp"
 
 enum eOperandType {
 	int8,
@@ -29,7 +30,7 @@ class IOperand {
 		virtual int getPrecision( void ) const = 0; //Precision of the type of the instance
 		virtual eOperandType getType( void ) const = 0; //Type of the instance
 
-	//	virtual IOperand const * operator+( IOperand const & rhs ) const = 0; //Sum
+		virtual IOperand const * operator+( IOperand const & rhs ) const = 0; //Sum
 	//	virtual IOperand const * operator-( IOperand const & rhs ) const = 0; //Difference
 	//	virtual IOperand const * operator*( IOperand const & rhs ) const = 0; //Product
 	//	virtual IOperand const * operator/( IOperand const & rhs ) const = 0; //Quotient
@@ -75,48 +76,22 @@ class Operand : public IOperand {
 			}
 			return (*this);
 		}
+		virtual IOperand const * operator+( IOperand const & rhs ) const { //Sum
+			long double		lhs_val = std::stold(this->_val);
+			long double		rhs_val = std::stold(rhs.toString());
+			long double		result = lhs_val + rhs_val;
+			Factory			f;
+			int		lhs_prec = this->getPrecision();
+			int		rhs_prec = rhs.getPrecision();
+			IOperand const * op = NULL;
+			if (lhs_prec < rhs_prec)
+				op = f.createOperand( rhs.getType() ,std::to_string(result));
+			else
+				op = f.createOperand( this->getType() ,std::to_string(result));
+			return (op);
+		}
 };
 
-class Factory {
-	public:
-		Factory( void ) {};
-		Factory & operator=(Factory const & src) {
-			if (this != &src) {
-				*this = src;
-			}
-			return (*this);
-		}
-		~Factory( void ) {};
-		IOperand const * createInt8(std::string const & value) const {
-			return (new Operand<int8_t>(value, int8));
-		}
-		IOperand const * createInt16(std::string const & value) const {
-			return (new Operand<int16_t>(value, int16));
-		}
-		IOperand const * createInt32(std::string const & value) const {
-			return (new Operand<int32_t>(value, int32));
-		}
-		IOperand const * createFloat(std::string const & value) const {
-			return (new Operand<float>(value, FLOAT));
-		}
-		IOperand const * createDouble(std::string const & value) const {
-			return (new Operand<double>(value, DOUBLE));
-		}
-		IOperand const * createOperand(eOperandType type, std::string const & value) {
-			switch (type) {
-			case 0:
-				return (this->createInt8(value));
-			case int16:
-				return (this->createInt16(value));
-			case int32:
-				return (this->createInt32(value));
-			case FLOAT:
-				return (this->createFloat(value));
-			case DOUBLE:
-				return (this->createDouble(value));
-			}
-		}
-};
 #endif
 
 
