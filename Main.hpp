@@ -6,14 +6,13 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:31:00 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 15:13:17 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 15:14:17 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_HPP
 # define MAIN_HPP
 
-// #include "IOperand"
 # include "Factory.hpp"
 # include "Parse.hpp"
 
