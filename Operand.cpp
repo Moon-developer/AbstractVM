@@ -6,12 +6,11 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 14:16:17 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 14:54:08 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Operand.hpp"
-#include "Factory.hpp"
 
 // constructor
 template<typename T>
@@ -69,10 +68,12 @@ IOperand const * Operand<T>::operator+( IOperand const & rhs ) const { //Sum
 	long double		lhs_val = std::stold(this->_val);
 	long double		rhs_val = std::stold(rhs.toString());
 	long double		result = lhs_val + rhs_val;
-	Factory			f;
 	int		lhs_prec = this->getPrecision();
 	int		rhs_prec = rhs.getPrecision();
+
+	Factory			f;
 	IOperand const * op = NULL;
+
 	if (lhs_prec < rhs_prec)
 		op = f.createOperand( rhs.getType() ,std::to_string(result));
 	else
