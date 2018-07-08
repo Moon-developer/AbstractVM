@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:31:00 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 15:50:13 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:30:59 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MAIN_HPP
 
 
-# include "Factory.hpp"
+# include "Operand.hpp"
 # include "Parse.hpp"
 
 #endif
