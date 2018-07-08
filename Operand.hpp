@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 16:12:30 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:42:17 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ class Operand : public IOperand {
 		virtual std::string const & toString( void ) const;
 		IOperand const & operator=( IOperand const & rhs); 
 		virtual IOperand const * operator+( IOperand const & rhs ) const; 
+		virtual IOperand const * operator-( IOperand const & rhs ) const; 
+		virtual IOperand const * operator*( IOperand const & rhs ) const; 
+		virtual IOperand const * operator/( IOperand const & rhs ) const; 
 };
 
 #include "Operand.cpp"
