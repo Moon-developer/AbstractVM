@@ -6,14 +6,14 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 10/31/41 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 10:42:31 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 14:17:19 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		FACTORY_HPP
 # define	FACTORY_HPP
 
-# include "IOperand.hpp"
+#include "Operand.hpp"
 
 class Factory {
 	public:
