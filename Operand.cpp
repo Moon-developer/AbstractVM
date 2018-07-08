@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 15:58:02 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:13:47 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ std::string const & Operand<T>::toString( void ) const {
 
 // = operator
 template<typename T>
-Operand & Operand<T>::operator=(Operand const & src) {
-	if (this != &src) {
-		*this = src;
+IOperand const & Operand<T>::operator=( IOperand const & rhs) {
+	if (this != &rhs) {
+		*this = rhs;
 	}
 	return (*this);
 }
