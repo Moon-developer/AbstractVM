@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 14:19:14 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 14:52:00 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ class Operand : public IOperand {
 		Operand & operator=(Operand const & src); 
 		virtual IOperand const * operator+( IOperand const & rhs ) const; 
 };
+
+#include "Operand.cpp"
 
 #endif
