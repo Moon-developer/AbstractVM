@@ -6,13 +6,13 @@
 #    By: nfruneau <nfruneau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 15:56:35 by nfruneau          #+#    #+#              #
-#    Updated: 2018/07/08 14:31:03 by mafernan         ###   ########.fr        #
+#    Updated: 2018/07/08 14:57:22 by mafernan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 COM = clang++
 
-FLAGS = -std=c++11 -Wall -Werror -Wextra
+FLAGS = -std=c++1v -Wall -Werror -Wextra
 
 NAME = avm
 
