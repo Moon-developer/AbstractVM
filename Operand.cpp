@@ -6,11 +6,12 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 16:13:47 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:41:35 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Operand.hpp"
+#include "Factory.hpp"
 
 // constructor
 template<typename T>
@@ -62,21 +63,94 @@ IOperand const & Operand<T>::operator=( IOperand const & rhs) {
 	return (*this);
 }
 
-// + operator
+// plus operator
 template<typename T>
 IOperand const * Operand<T>::operator+( IOperand const & rhs ) const { //Sum
 	long double		lhs_val = std::stold(this->_val);
 	long double		rhs_val = std::stold(rhs.toString());
 	long double		result = lhs_val + rhs_val;
-	int		lhs_prec = this->getPrecision();
-	int		rhs_prec = rhs.getPrecision();
+	int				lhs_prec = this->getPrecision();
+	int				rhs_prec = rhs.getPrecision();
 
-	Factory			f;
-	IOperand const * op = NULL;
+	Factory				f;
+	IOperand const *	op = NULL;
 
-	if (lhs_prec < rhs_prec)
+	if (lhs_prec < rhs_prec) {
+		// check result for overflow and underflow as rhs.getType()
 		op = f.createOperand( rhs.getType() ,std::to_string(result));
-	else
+	}
+	else {
+		// check result for overflow and underflow as this->getType()
 		op = f.createOperand( this->getType() ,std::to_string(result));
+	}
+	return (op);
+}
+
+// minus operator
+template<typename T>
+IOperand const * Operand<T>::operator-( IOperand const & rhs ) const { //Sum
+	long double		lhs_val = std::stold(this->_val);
+	long double		rhs_val = std::stold(rhs.toString());
+	long double		result = lhs_val - rhs_val;
+	int				lhs_prec = this->getPrecision();
+	int				rhs_prec = rhs.getPrecision();
+
+	Factory				f;
+	IOperand const *	op = NULL;
+
+	if (lhs_prec < rhs_prec) {
+		// check result for overflow and underflow as rhs.getType()
+		op = f.createOperand( rhs.getType() ,std::to_string(result));
+	}
+	else {
+		// check result for overflow and underflow as this->getType()
+		op = f.createOperand( this->getType() ,std::to_string(result));
+	}
+	return (op);
+}
+
+// multiply operator
+template<typename T>
+IOperand const * Operand<T>::operator*( IOperand const & rhs ) const { //Sum
+	long double		lhs_val = std::stold(this->_val);
+	long double		rhs_val = std::stold(rhs.toString());
+	long double		result = lhs_val * rhs_val;
+	int				lhs_prec = this->getPrecision();
+	int				rhs_prec = rhs.getPrecision();
+
+	Factory				f;
+	IOperand const *	op = NULL;
+
+	if (lhs_prec < rhs_prec) {
+		// check result for overflow and underflow as rhs.getType()
+		op = f.createOperand( rhs.getType() ,std::to_string(result));
+	}
+	else {
+		// check result for overflow and underflow as this->getType()
+		op = f.createOperand( this->getType() ,std::to_string(result));
+	}
+	return (op);
+}
+
+// divide operator
+template<typename T>
+IOperand const * Operand<T>::operator/( IOperand const & rhs ) const { //Sum
+	long double		lhs_val = std::stold(this->_val);
+	long double		rhs_val = std::stold(rhs.toString());
+	long double		result = lhs_val / rhs_val;
+	int				lhs_prec = this->getPrecision();
+	int				rhs_prec = rhs.getPrecision();
+
+	Factory				f;
+	IOperand const *	op = NULL;
+
+	if (lhs_prec < rhs_prec) {
+		// check result for overflow and underflow as rhs.getType()
+		op = f.createOperand( rhs.getType() ,std::to_string(result));
+	}
+	else {
+		// check result for overflow and underflow as this->getType()
+		op = f.createOperand( this->getType() ,std::to_string(result));
+	}
 	return (op);
 }
