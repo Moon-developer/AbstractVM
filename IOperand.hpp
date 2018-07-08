@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 10/38/23 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 13:56:42 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/08 14:52:23 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <iostream>
 # include <string>
-
-class Factory;
 
 enum eOperandType {
 	int8,
