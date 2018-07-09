@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 10/31/41 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 14:17:19 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 07:28:58 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "Operand.hpp"
 
+// Factory method
 class Factory {
 	public:
 		Factory( void ) {};
