@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:58:51 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/09 09:35:25 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 10:00:33 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 std::vector<std::string>	splitspace(std::string input);
 
 int		remove_comment(std::string & input);
-void	validate(std::string & input, std::string* & cmds);
-void	CheckOUFlow(std::string func, std::string num, std::string* & cmds);
+void	validate(std::string & input, std::string cmds[]);
+void	CheckOUFlow(std::string func, std::string num);
 
 #endif
