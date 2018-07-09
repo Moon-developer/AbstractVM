@@ -6,14 +6,14 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 16:41:35 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 07:29:09 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Operand.hpp"
 #include "Factory.hpp"
 
-// constructor
+// Constructor
 template<typename T>
 Operand<T>::Operand(std::string val, eOperandType type) : _val(val), _type(type) {};
 // copy
