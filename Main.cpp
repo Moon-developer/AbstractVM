@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/09 10:02:56 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 15:14:22 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,19 @@ void	parse_file(std::string file)
 				exit = true;
 			}
 			else if (cmds[3] == "reg_cmd")
-				std::cout << "run : " + line << std::endl;
+				std::cout << "run push command here" << std::endl;
+				//run_reg_cmds(cmds[0], stack);
 			else if (cmds[3] == "push/assert")
 			{
-				CheckOUFlow(cmds[1], cmds[2]);
-				std::cout << "run : " + line << std::endl;
+				if (cmds[0] == "push") {
+					std::cout << "run push command here" << std::endl;
+					//push(cmds, stack);
+				}
+				else if (cmds[0] == "assert") {
+					std::cout << "run assert command here" << std::endl;
+//					assert(cmds, stack); // checks if the instance at the top of 
+//												the stack is of the same type and value
+				}
 			}
 			else if (cmds[3] == "end")
 				std::cout << line << std::endl;
@@ -108,16 +116,16 @@ void	loop(void)
 			std::string		cmds[4];
 			validate(input, cmds);
 			if (cmds[3] == "end") {
+				for (int i = stack.size() - 1; i >= 0; i--)
+					delete stack[i];
 				exit = true;
 			}
 			if (cmds[3] == "reg_cmd")
-				std::cout << "run : " + input << std::endl;
+				run_reg_cmds(cmds[0], stack);
 			if (cmds[3] == "push/assert")
 			{
 				if (cmds[0] == "push") {
-					std::cout << "run push command here" << std::endl;
 					push(cmds, stack);
-					std::cout << "stack size" << stack.size() << std::endl;
 				}
 				else if (cmds[0] == "assert") {
 					std::cout << "run assert command here" << std::endl;
