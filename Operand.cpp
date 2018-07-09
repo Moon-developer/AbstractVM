@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/09 07:29:39 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 15:06:35 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 
 // Constructor
 template<typename T>
-Operand<T>::Operand(std::string val, eOperandType type) : _val(val), _type(type) {};
+Operand<T>::Operand(std::string val, eOperandType type) : _type(type) {
+	long double temp = std::stold(val);
+	T new_val = static_cast<T>(temp);
+	_val = std::to_string(new_val);
+};
 // copy
 template<typename T>
 Operand<T>::Operand( Operand const & src ) {
@@ -51,7 +55,7 @@ int Operand<T>::getPrecision( void ) const {
 // return the val as a string
 template<typename T>
 std::string const & Operand<T>::toString( void ) const { 
-	return (_val);
+	return (this->_val);
 }
 
 // = operator
