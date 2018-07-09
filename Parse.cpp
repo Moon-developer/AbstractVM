@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:50:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/09 09:34:46 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 10:00:40 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		remove_comment(std::string & input)
 }
 
 // check if input options are true
-void	validate(std::string & input, std::string* & cmds) 
+void	validate(std::string & input, std::string cmds[4]) 
 {
 	std::regex		reg("(push|assert) (int8|int16|int32|float|double)\\s?\\(-?[[:digit:]]+(.?[[:digit:]]+)?\\)\\B");
 	std::regex		reg_cmds("add\\b|sub\\b|mod\\b|dump\\b|div\\b|mul\\b|pop\\b|print\\b");
@@ -90,58 +90,39 @@ void	validate(std::string & input, std::string* & cmds)
 }
 
 // check if function has overflow or underflow
-void	CheckOUFlow(std::string func, std::string num, std::string* & cmds)
+void	CheckOUFlow(std::string func, std::string num)
 {
 	long double size = std::stold(num);
 
 	if (func == "int8") {
 		if (size > INT8_MAX) {
-			delete [] cmds;
 			throw Error::OverflowError();
 		}
-		if (size < INT8_MIN) {
-			delete [] cmds;
+		if (size < INT8_MIN)
 			throw Error::UnderflowError();
-		}
 	}
 	else if (func == "int16") {
-		if (size > INT16_MAX) {
-			delete [] cmds;
+		if (size > INT16_MAX)
 			throw Error::OverflowError();
-		}
-		if (size < INT16_MIN) {
-			delete [] cmds;
+		if (size < INT16_MIN)
 			throw Error::UnderflowError();
-		}
 	}
 	else if (func == "int32") {
-		if (size > INT32_MAX) {
-			delete [] cmds;
+		if (size > INT32_MAX)
 			throw Error::OverflowError();
-		}
-		if (size < INT32_MIN) {
-			delete [] cmds;
+		if (size < INT32_MIN)
 			throw Error::UnderflowError();
-		}
 	}
 	else if (func == "float") {
-		if (size > FLT_MAX) {
-			delete [] cmds;
+		if (size > FLT_MAX)
 			throw Error::OverflowError();
-		}
-		if (std::fabsl(size) < FLT_MIN && std::fabsl(size) > 0) {
-			delete [] cmds;
+		if (std::fabsl(size) < FLT_MIN && std::fabsl(size) > 0)
 			throw Error::UnderflowError();
-		}
 	}
 	else if (func == "double") {
-		if (size > DBL_MAX) {
-			delete [] cmds;
+		if (size > DBL_MAX)
 			throw Error::OverflowError();
-		}
-		if (std::fabsl(size) < DBL_MIN && std::fabsl(size) > 0) {
-			delete [] cmds;
+		if (std::fabsl(size) < DBL_MIN && std::fabsl(size) > 0)
 			throw Error::UnderflowError();
-		}
 	}
 }
