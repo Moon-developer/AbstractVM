@@ -6,15 +6,11 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 15:49:30 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 09:36:12 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Main.hpp"
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <vector>
 
 // return true if exit cmd found for file
 bool	find_exit(std::string file)
@@ -68,7 +64,7 @@ void	parse_file(std::string file)
 				std::cout << "run : " + line << std::endl;
 			else if (cmds[3] == "push/assert")
 			{
-				CheckOUFlow(cmds[1], cmds[2]);
+				CheckOUFlow(cmds[1], cmds[2], cmds);
 				std::cout << "run : " + line << std::endl;
 			}
 			else if (cmds[3] == "end")
@@ -119,13 +115,24 @@ void	loop(void)
 				std::cout << "run : " + input << std::endl;
 			if (cmds[3] == "push/assert")
 			{
-				CheckOUFlow(cmds[1], cmds[2]);
-				Factory	f;
-				IOperand const * op = f.createOperand(eOperandType::int8, cmds[2]);
-				stack.emplace_back(op);
-				delete op;
-				std::cout << "stack size : " << stack.size() << std::endl;
-				std::cout << "run : " + input << std::endl;
+				if (cmds[0] == "push") {
+					CheckOUFlow(cmds[1], cmds[2], cmds);
+					std::cout << "run push command here" << std::endl;
+					push(cmds, stack);
+					std::cout << "stack size" << stack.size() << std::endl;
+				}
+				else if (cmds[0] == "assert") {
+					std::cout << "run assert command here" << std::endl;
+//					assert(cmds, stack); // checks if the instance at the top of 
+//												the stack is of the same type and value
+				}
+//				CheckOUFlow(cmds[1], cmds[2]);
+//				Factory	f;
+//				IOperand const * op = f.createOperand(eOperandType::int8, cmds[2]);
+//				stack.emplace_back(op);
+//				delete op;
+//				std::cout << "stack size : " << stack.size() << std::endl;
+//				std::cout << "run : " + input << std::endl;
 			}
 			if (cmds[3] == "end")
 				std::cout << input << std::endl;
