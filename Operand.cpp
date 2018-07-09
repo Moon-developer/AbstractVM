@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/09 07:29:09 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 07:29:39 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ template<typename T>
 Operand<T>::Operand( Operand const & src ) {
 	*this = src;
 }
-// deconstructor
+// Deconstructor
 template<typename T>
 Operand<T>::~Operand( void ) {}; // deconstructor
 
