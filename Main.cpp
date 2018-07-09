@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/09 09:36:12 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 10:02:56 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	parse_file(std::string file)
 	}
 	while (std::getline( input, line ) && exit != true)
 	{
-		std::string*	cmds = new std::string[4];
+		std::string	cmds[4];
 		try
 		{
 			validate(line, cmds);
@@ -64,7 +64,7 @@ void	parse_file(std::string file)
 				std::cout << "run : " + line << std::endl;
 			else if (cmds[3] == "push/assert")
 			{
-				CheckOUFlow(cmds[1], cmds[2], cmds);
+				CheckOUFlow(cmds[1], cmds[2]);
 				std::cout << "run : " + line << std::endl;
 			}
 			else if (cmds[3] == "end")
@@ -74,7 +74,6 @@ void	parse_file(std::string file)
 		{
 			std::cout << e.what() << std::endl;
 		}
-		delete [] cmds;
 	}
 	input.close();
 }
@@ -106,7 +105,7 @@ void	loop(void)
 		std::getline (std::cin, input);
 		try
 		{
-			std::string*	cmds = new std::string[4];
+			std::string		cmds[4];
 			validate(input, cmds);
 			if (cmds[3] == "end") {
 				exit = true;
@@ -116,7 +115,6 @@ void	loop(void)
 			if (cmds[3] == "push/assert")
 			{
 				if (cmds[0] == "push") {
-					CheckOUFlow(cmds[1], cmds[2], cmds);
 					std::cout << "run push command here" << std::endl;
 					push(cmds, stack);
 					std::cout << "stack size" << stack.size() << std::endl;
@@ -126,17 +124,9 @@ void	loop(void)
 //					assert(cmds, stack); // checks if the instance at the top of 
 //												the stack is of the same type and value
 				}
-//				CheckOUFlow(cmds[1], cmds[2]);
-//				Factory	f;
-//				IOperand const * op = f.createOperand(eOperandType::int8, cmds[2]);
-//				stack.emplace_back(op);
-//				delete op;
-//				std::cout << "stack size : " << stack.size() << std::endl;
-//				std::cout << "run : " + input << std::endl;
 			}
 			if (cmds[3] == "end")
 				std::cout << input << std::endl;
-			delete [] cmds;
 		}
 		catch (std::exception & e) 
 		{
@@ -148,8 +138,6 @@ void	loop(void)
 // start vm and look for input file or wait for input
 int		main(int ac, char **av)
 {
-
-
 	if (ac > 1)
 		read_files(av, ac);
 	else
