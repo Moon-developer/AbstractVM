@@ -6,14 +6,14 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 15:05:15 by mafernan          #+#    #+#             */
-/*   Updated: 2018/06/22 15:16:28 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 07:28:46 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <exception>
 
-// nested error handling classes
+// Nested error handling classes
 class Error {
 	public:
 		class SyntaxError : public std::exception {
