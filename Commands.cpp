@@ -6,15 +6,15 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 08:56:46 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/09 09:27:53 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 10:02:53 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Commands.hpp"
 
-void	push(std::string* & cmds, std::vector<IOperand const *> & stack)
+void	push(std::string cmds[4], std::vector<IOperand const *> & stack)
 {
-	//CheckOUFlow(cmds[1], cmds[2]);
+	CheckOUFlow(cmds[1], cmds[2]);
 	Factory	f;
 	if (cmds[1] == "int8")
 	{
