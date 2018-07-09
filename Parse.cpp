@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:50:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/06 16:16:10 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/09 09:34:46 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,39 +90,58 @@ void	validate(std::string & input, std::string* & cmds)
 }
 
 // check if function has overflow or underflow
-void	CheckOUFlow(std::string func, std::string num)
+void	CheckOUFlow(std::string func, std::string num, std::string* & cmds)
 {
 	long double size = std::stold(num);
 
 	if (func == "int8") {
 		if (size > INT8_MAX) {
+			delete [] cmds;
 			throw Error::OverflowError();
 		}
-		if (size < INT8_MIN)
+		if (size < INT8_MIN) {
+			delete [] cmds;
 			throw Error::UnderflowError();
+		}
 	}
 	else if (func == "int16") {
-		if (size > INT16_MAX)
+		if (size > INT16_MAX) {
+			delete [] cmds;
 			throw Error::OverflowError();
-		if (size < INT16_MIN)
+		}
+		if (size < INT16_MIN) {
+			delete [] cmds;
 			throw Error::UnderflowError();
+		}
 	}
 	else if (func == "int32") {
-		if (size > INT32_MAX)
+		if (size > INT32_MAX) {
+			delete [] cmds;
 			throw Error::OverflowError();
-		if (size < INT32_MIN)
+		}
+		if (size < INT32_MIN) {
+			delete [] cmds;
 			throw Error::UnderflowError();
+		}
 	}
 	else if (func == "float") {
-		if (size > FLT_MAX)
+		if (size > FLT_MAX) {
+			delete [] cmds;
 			throw Error::OverflowError();
-		if (std::fabsl(size) < FLT_MIN && std::fabsl(size) > 0)
+		}
+		if (std::fabsl(size) < FLT_MIN && std::fabsl(size) > 0) {
+			delete [] cmds;
 			throw Error::UnderflowError();
+		}
 	}
 	else if (func == "double") {
-		if (size > DBL_MAX)
+		if (size > DBL_MAX) {
+			delete [] cmds;
 			throw Error::OverflowError();
-		if (std::fabsl(size) < DBL_MIN && std::fabsl(size) > 0)
+		}
+		if (std::fabsl(size) < DBL_MIN && std::fabsl(size) > 0) {
+			delete [] cmds;
 			throw Error::UnderflowError();
+		}
 	}
 }
