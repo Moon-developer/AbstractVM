@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/08 16:42:17 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/11 08:24:46 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define	OPERAND_HPP
 
 # include "IOperand.hpp"
+# include <cmath>
 
 template<typename T>
 class Operand : public IOperand {
@@ -32,6 +33,7 @@ class Operand : public IOperand {
 		virtual IOperand const * operator-( IOperand const & rhs ) const; 
 		virtual IOperand const * operator*( IOperand const & rhs ) const; 
 		virtual IOperand const * operator/( IOperand const & rhs ) const; 
+		virtual IOperand const * operator%( IOperand const & rhs ) const; 
 };
 
 #include "Operand.cpp"
