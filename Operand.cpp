@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/11 15:45:06 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:51:48 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,12 @@ IOperand const * Operand<T>::operator-( IOperand const & rhs ) const { //Sum
 
 	if (lhs_prec < rhs_prec) {
 		// check result for overflow and underflow as rhs.getType()
+		CheckOverUnderFlow(rhs.getType(), result);
 		op = f.createOperand( rhs.getType() ,std::to_string(result));
 	}
 	else {
 		// check result for overflow and underflow as this->getType()
+		CheckOverUnderFlow(this->getType(), result);
 		op = f.createOperand( this->getType() ,std::to_string(result));
 	}
 	return (op);
@@ -131,10 +133,12 @@ IOperand const * Operand<T>::operator*( IOperand const & rhs ) const { //Sum
 
 	if (lhs_prec < rhs_prec) {
 		// check result for overflow and underflow as rhs.getType()
+		CheckOverUnderFlow(rhs.getType(), result);
 		op = f.createOperand( rhs.getType() ,std::to_string(result));
 	}
 	else {
 		// check result for overflow and underflow as this->getType()
+		CheckOverUnderFlow(this->getType(), result);
 		op = f.createOperand( this->getType() ,std::to_string(result));
 	}
 	return (op);
@@ -154,10 +158,12 @@ IOperand const * Operand<T>::operator/( IOperand const & rhs ) const { //Sum
 
 	if (lhs_prec < rhs_prec) {
 		// check result for overflow and underflow as rhs.getType()
+		CheckOverUnderFlow(rhs.getType(), result);
 		op = f.createOperand( rhs.getType() ,std::to_string(result));
 	}
 	else {
 		// check result for overflow and underflow as this->getType()
+		CheckOverUnderFlow(this->getType(), result);
 		op = f.createOperand( this->getType() ,std::to_string(result));
 	}
 	return (op);
@@ -176,10 +182,12 @@ IOperand const * Operand<T>::operator%( IOperand const & rhs ) const { //Sum
 
 	if (lhs_prec < rhs_prec) {
 		// check result for overflow and underflow as rhs.getType()
+		CheckOverUnderFlow(rhs.getType(), result);
 		op = f.createOperand( rhs.getType() ,std::to_string(result));
 	}
 	else {
 		// check result for overflow and underflow as this->getType()
+		CheckOverUnderFlow(this->getType(), result);
 		op = f.createOperand( this->getType() ,std::to_string(result));
 	}
 	return (op);
