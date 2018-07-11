@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 15:05:15 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/11 15:46:33 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/11 16:01:42 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ class Error {
 		class EmptyError : public std::exception {
 			public:
 				virtual const char* what() const throw() {
-						return "Stack size ERROR: Attempted operand on empty stack.";
+						return "Stack size ERROR: Attempted command on empty stack.";
 				}
 		};
 		class ZeroError : public std::exception {
