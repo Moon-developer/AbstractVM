@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 08:56:46 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/11 15:13:07 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:59:22 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,13 +138,13 @@ void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, in
 	}
 	else if (cmds[0] == "print")
 	{
+		if (stack.size() < 1)
+			throw Error::EmptyError();
 		if (stack[stack.size() - 1]->getType() != 0)
 			throw Error::NotInt8(std::to_string(line), com_arr(cmds));
 		else
-		{
 			std::cout << "ascii : " << static_cast<char>(static_cast<int8_t>(std::stold(stack[stack.size() - 1]->toString()))) << std::endl;
 
-		}
 	}
 }
 
