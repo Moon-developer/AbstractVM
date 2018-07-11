@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:50:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/11 13:40:39 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:47:38 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,3 +128,43 @@ void	CheckOUFlow(int line, std::string cmds[4], std::string input)
 			throw Error::UnderflowError(std::to_string(line), input);
 	}
 }
+
+void	CheckOverUnderFlow(eOperandType _type, long double size)
+{
+	int		type = _type;
+
+	std::cout << "checking overflow and underflow type: " << type << std::endl;
+	std::cout << "size: " << size << std::endl;
+	if (type == 0) {
+		if (size > INT8_MAX) {
+			throw Error::OverflowError("Unknown", std::to_string(size));
+		}
+		if (size < INT8_MIN)
+			throw Error::UnderflowError("Unknown", std::to_string(size));
+	}
+	else if (type == 1) {
+		if (size > INT16_MAX)
+			throw Error::OverflowError("Unknown", std::to_string(size));
+		if (size < INT16_MIN)
+			throw Error::UnderflowError("Unknown", std::to_string(size));
+	}
+	else if (type == 2) {
+		if (size > INT32_MAX)
+			throw Error::OverflowError("Unknown", std::to_string(size));
+		if (size < INT32_MIN)
+			throw Error::UnderflowError("Unknown", std::to_string(size));
+	}
+	else if (type == 3) {
+		if (size > FLT_MAX)
+			throw Error::OverflowError("Unknown", std::to_string(size));
+		if (std::fabsl(size) < FLT_MIN && std::fabsl(size) > 0)
+			throw Error::UnderflowError("Unknown", std::to_string(size));
+	}
+	else if (type == 4) {
+		if (size > DBL_MAX)
+			throw Error::OverflowError("Unknown", std::to_string(size));
+		if (std::fabsl(size) < DBL_MIN && std::fabsl(size) > 0)
+			throw Error::UnderflowError("Unknown", std::to_string(size));
+	}
+}
+
