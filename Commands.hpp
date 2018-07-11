@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 09:11:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/09 10:20:47 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/11 13:24:53 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "Operand.hpp"
 # include "Parse.hpp"
 
-void	push(std::string cmds[], std::vector<IOperand const *> & stack);
-void	run_reg_cmds(std::string cmd, std::vector<IOperand const *> & stack);
+void	push(int line, std::string cmds[4], std::vector<IOperand const *> & stack, std::string input);
+void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, int line);
 
 #endif
