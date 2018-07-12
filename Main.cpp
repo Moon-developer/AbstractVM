@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/11 13:25:03 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/12 10:54:58 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,8 @@ void	parse_file(std::string file)
 }
 
 // check if given files is a valid .avm file
-void	read_files(char **files, int total)
-{
-	for (int index = 1; index < total; index++)
-	{
+void	read_files(char **files, int total) {
+	for (int index = 1; index < total; index++) {
 		std::string	file = files[index];
 		std::size_t found = file.find(".avm");
 		if (found!=std::string::npos)
@@ -101,19 +99,16 @@ void	read_files(char **files, int total)
 }
 
 // loop for all possible inputs
-void	loop(void) 
-{
+void	loop(void)  {
 	bool					exit = false;
 	std::string				input;
 	std::string				test;
 	std::vector<IOperand const *>	stack;
 	int						line = 0;
 
-	while (!exit) 
-	{
+	while (!exit) {
 		std::getline (std::cin, input);
-		try
-		{
+		try {
 			std::string		cmds[4];
 			line++;
 			validate(line, input, cmds);
@@ -124,30 +119,23 @@ void	loop(void)
 			}
 			if (cmds[3] == "reg_cmd")
 				run_reg_cmds(cmds, stack, line);
-			if (cmds[3] == "push/assert")
-			{
-				if (cmds[0] == "push") {
+			if (cmds[3] == "push/assert") {
+				if (cmds[0] == "push")
 					push(line, cmds, stack, input);
-				}
-				else if (cmds[0] == "assert") {
-					std::cout << "run assert command here" << std::endl;
-//					assert(cmds, stack); // checks if the instance at the top of 
-//												the stack is of the same type and value
-				}
+				else if (cmds[0] == "assert")
+					assert(line, cmds, stack, input);
 			}
 			if (cmds[3] == "end")
 				std::cout << input << std::endl;
 		}
-		catch (std::exception & e) 
-		{
+		catch (std::exception & e) {
 			std::cout << e.what() << std::endl;
 		}
 	}
 }
 
 // start vm and look for input file or wait for input
-int		main(int ac, char **av)
-{
+int		main(int ac, char **av) {
 	if (ac > 1)
 		read_files(av, ac);
 	else
