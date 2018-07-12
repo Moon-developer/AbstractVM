@@ -6,7 +6,7 @@
 #    By: nfruneau <nfruneau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 15:56:35 by nfruneau          #+#    #+#              #
-#    Updated: 2018/07/09 14:01:18 by mafernan         ###   ########.fr        #
+#    Updated: 2018/07/12 14:24:50 by mafernan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,7 @@ FLAGS = -std=c++1z -Wall -Werror -Wextra
 
 NAME = avm
 
-SRC = Main.cpp Parse.cpp Commands.cpp
+SRC = Main.cpp Parse.cpp Commands.cpp Factory.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
