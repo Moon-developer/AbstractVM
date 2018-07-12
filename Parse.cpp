@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:50:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 11:00:52 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/12 11:10:35 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,6 @@ void	CheckOUFlow(int line, std::string cmds[4], std::string input) {
 void	CheckOverUnderFlow(eOperandType _type, long double size) {
 	int		type = _type;
 
-	std::cout << "checking overflow and underflow type: " << type << std::endl;
-	std::cout << "size: " << size << std::endl;
 	if (type == 0) {
 		if (size > INT8_MAX) {
 			throw Error::OverflowError("Unknown", std::to_string(size));
