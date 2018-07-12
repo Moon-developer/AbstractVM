@@ -6,11 +6,12 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 16:02:13 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/12 18:02:26 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Main.hpp"
+#include <string>
 
 // return true if exit cmd found for file
 bool	find_exit(std::string file)
@@ -97,14 +98,62 @@ void	read_files(char **files, int total) {
 
 // loop for all possible inputs
 void	loop(void)  {
+	bool							exit = false;
+	std::vector<IOperand const *>	stack;
+	std::vector<std::string>		commands;
+	int								exitF = 0;
+
+	while (!exit) {
+		std::string in;
+		std::getline (std::cin, in);
+		remove_comment(in);
+		if (in == "exit")
+			exitF = 1;
+		if (in == ";;") {
+			if (exitF != 1) {
+				std::cout << "No exit command found!" << std::endl;
+				std::exit (EXIT_FAILURE);
+			}
+			else
+				exit = true;
+		}
+		if (in == "")
+			std::cout << "Invalid syntax" << std::endl;
+		else if (in != ";;")
+			commands.push_back(in);
+	}
+	for (unsigned long line = 0; line < commands.size() - 1; line++) {
+		std::string		input = commands[line];
+		try {
+			std::string		cmds[4];
+			validate(line, input, cmds);
+			if (cmds[3] == "reg_cmd")
+				run_reg_cmds(cmds, stack, line);
+			else if (cmds[3] == "push/assert") {
+				if (cmds[0] == "push")
+					push(line, cmds, stack, input);
+				else if (cmds[0] == "assert")
+					assert(line, cmds, stack, input);
+			}
+		}
+		catch (std::exception & e) {
+			std::cout << e.what() << std::endl;
+		}
+	}
+	for (int i = stack.size() - 1; i >= 0; i--)
+		delete stack[i];
+}
+
+// run with interactive mode, this is a bonus
+void	loop_i_flag(void)  {
 	bool					exit = false;
 	std::string				input;
-	std::string				test;
 	std::vector<IOperand const *>	stack;
 	int						line = 0;
 
 	while (!exit) {
 		std::getline (std::cin, input);
+		remove_comment(input);
 		try {
 			std::string		cmds[4];
 			line++;
@@ -133,8 +182,13 @@ void	loop(void)  {
 
 // start vm and look for input file or wait for input
 int		main(int ac, char **av) {
-	if (ac > 1)
-		read_files(av, ac);
+	if (ac > 1) {
+		std::string temp = av[1];
+		if (temp.compare("-i") == 0)
+			loop_i_flag();
+		else
+			read_files(av, ac);
+	}
 	else
 		loop();
 	return (0);
