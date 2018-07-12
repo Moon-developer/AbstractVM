@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 09:53:14 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/12 11:21:58 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ template<typename T>
 Operand<T>::Operand(std::string val, eOperandType type) : _type(type) {
 	long double temp = std::stold(val);
 	T new_val = static_cast<T>(temp);
-	_val = std::to_string(new_val);
+	_val = std::to_string(static_cast<T>(new_val));
 };
 // copy
 template<typename T>
