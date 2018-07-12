@@ -6,15 +6,15 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 11:21:58 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/12 16:27:32 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Operand.hpp"
 #include "Factory.hpp"
 #include <iomanip>
-# include <cfloat>
-# include <cmath>
+#include <cfloat>
+#include <cmath>
 
 
 // Constructor
