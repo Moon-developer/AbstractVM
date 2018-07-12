@@ -6,14 +6,13 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 08:56:46 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 10:11:20 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/12 10:57:33 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Commands.hpp"
 
-std::string	com_arr(std::string list[])
-{
+std::string	com_arr(std::string list[]) {
 	std::string		result;
 	int				size = list->size();
 
@@ -24,14 +23,11 @@ std::string	com_arr(std::string list[])
 	return (result);
 }
 
-void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, int line)
-{
-	if (cmds[0] == "add")
-	{
+void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, int line) {
+	if (cmds[0] == "add") {
 		if (stack.size() < 2)
 			throw Error::StackSizeError();
-		else
-		{
+		else {
 			IOperand const * pop1 = stack[stack.size() - 1];
 			IOperand const * pop2 = stack[stack.size() - 2];
 			IOperand const * newop;
@@ -43,12 +39,10 @@ void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, in
 			stack.push_back(newop);
 		}
 	}
-	else if (cmds[0] == "mul")
-	{
+	else if (cmds[0] == "mul") {
 		if (stack.size() < 2)
 			throw Error::StackSizeError();
-		else
-		{
+		else {
 			IOperand const * pop1 = stack[stack.size() - 1];
 			IOperand const * pop2 = stack[stack.size() - 2];
 			IOperand const * newop;
@@ -60,12 +54,10 @@ void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, in
 			stack.push_back(newop);
 		}
 	}
-	else if (cmds[0] == "sub")
-	{
+	else if (cmds[0] == "sub") {
 		if (stack.size() < 2)
 			throw Error::StackSizeError();
-		else
-		{
+		else {
 			IOperand const * pop1 = stack[stack.size() - 1];
 			IOperand const * pop2 = stack[stack.size() - 2];
 			IOperand const * newop;
@@ -77,12 +69,10 @@ void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, in
 			stack.push_back(newop);
 		}
 	}
-	else if (cmds[0] == "div")
-	{
+	else if (cmds[0] == "div") {
 		if (stack.size() < 2)
 			throw Error::StackSizeError();
-		else
-		{
+		else {
 			IOperand const * pop1 = stack[stack.size() - 1];
 			IOperand const * pop2 = stack[stack.size() - 2];
 			IOperand const * newop;
@@ -97,12 +87,10 @@ void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, in
 			stack.push_back(newop);
 		}
 	}
-	else if (cmds[0] == "mod")
-	{
+	else if (cmds[0] == "mod") {
 		if (stack.size() < 2)
 			throw Error::StackSizeError();
-		else
-		{
+		else {
 			IOperand const * pop1 = stack[stack.size() - 1];
 			IOperand const * pop2 = stack[stack.size() - 2];
 			IOperand const * newop;
@@ -117,27 +105,23 @@ void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, in
 			stack.push_back(newop);
 		}
 	}
-	else if (cmds[0] == "dump")
-	{
+	else if (cmds[0] == "dump") {
 		if (stack.size() < 1)
 			throw Error::StackSizeError();
 		else
 			for (int i = stack.size() - 1; i >= 0; i--)
 				std::cout << stack[i]->toString() << std::endl;
 	}
-	else if (cmds[0] == "pop")
-	{
+	else if (cmds[0] == "pop") {
 		if (stack.size() < 1)
 			throw Error::EmptyError();
-		else
-		{
+		else {
 			IOperand const * pop1 = stack[stack.size() - 1];
 			delete pop1;
 			stack.pop_back();
 		}
 	}
-	else if (cmds[0] == "print")
-	{
+	else if (cmds[0] == "print") {
 		if (stack.size() < 1)
 			throw Error::EmptyError();
 		if (stack[stack.size() - 1]->getType() != 0)
@@ -147,38 +131,69 @@ void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, in
 	}
 }
 
-void	push(int line, std::string cmds[4], std::vector<IOperand const *> & stack, std::string input)
-{
+void	push(int line, std::string cmds[4], std::vector<IOperand const *> & stack, std::string input) {
 	CheckOUFlow(line, cmds, input);
 	Factory	f;
-	if (cmds[1] == "int8")
-	{
+	if (cmds[1] == "int8") {
 		IOperand const * op = f.createOperand(eOperandType::int8, cmds[2]);
 		stack.emplace_back(op);
 	}
-	else if (cmds[1] == "int16")
-	{
+	else if (cmds[1] == "int16") {
 		IOperand const * op = f.createOperand(eOperandType::int16, cmds[2]);
 		stack.emplace_back(op);
 	}
-	else if (cmds[1] == "int32")
-	{
+	else if (cmds[1] == "int32") {
 		IOperand const * op = f.createOperand(eOperandType::int32, cmds[2]);
 		stack.emplace_back(op);
 	}
-	else if (cmds[1] == "float")
-	{
+	else if (cmds[1] == "float") {
 		IOperand const * op = f.createOperand(eOperandType::FLOAT, cmds[2]);
 		stack.emplace_back(op);
 	}
-	else if (cmds[1] == "double")
-	{
+	else if (cmds[1] == "double") {
 		IOperand const * op = f.createOperand(eOperandType::DOUBLE, cmds[2]);
 		stack.emplace_back(op);
 	}
 }
 
-void	assert(int line, std::string cmds[4], std::vector<IOperand const *> & stack, std::string input)
-{
-	IOpernad new 
+void	assert(int line, std::string cmds[4], std::vector<IOperand const *> & stack, std::string input) {
+	IOperand const * pop = stack[stack.size() - 1];
+	(void)line;
+	(void)input;
+	if (stack.size() < 1)
+		throw Error::EmptyError();
+	else {
+		if (cmds[1] == "int8" && pop->getType() == 0) {
+			if (cmds[2] == pop->toString())
+				std::cout << "value matches" << std::endl;
+			else 
+				throw Error::AssertError();
+		}
+		else if (cmds[1] == "int16" && pop->getType() == 1) {
+			if (cmds[2] == pop->toString())
+				std::cout << "value matches" << std::endl;
+			else 
+				throw Error::AssertError(); 
+		}
+		else if (cmds[1] == "int32" && pop->getType() == 2) {
+			if (cmds[2] == pop->toString())
+				std::cout << "value matches" << std::endl;
+			else 
+				throw Error::AssertError();
+		}
+		else if (cmds[1] == "float" && pop->getType() == 3) {
+			if (cmds[2] == pop->toString())
+				std::cout << "value matches" << std::endl;
+			else 
+				throw Error::AssertError();
+		}
+		else if (cmds[1] == "double" && pop->getType() == 4) {
+			if (cmds[2] == pop->toString())
+				std::cout << "value matches" << std::endl;
+			else 
+				throw Error::AssertError();
+		}
+		else
+			throw Error::AssertError();
+	}
 }
