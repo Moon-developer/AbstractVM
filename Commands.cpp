@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 08:56:46 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 11:28:23 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/12 16:29:41 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, in
 			IOperand const * pop1 = stack[stack.size() - 1];
 			IOperand const * pop2 = stack[stack.size() - 2];
 			IOperand const * newop;
-			long double	temp = std::stold(pop2->toString());
+			long double	temp = std::stold(pop1->toString());
 			if (temp == 0)
 				throw Error::ZeroError();
-			newop = *pop1 / *pop2;
+			newop = *pop2 / *pop1;
 			delete pop1;
 			delete pop2;
 			stack.pop_back();
@@ -94,10 +94,10 @@ void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, in
 			IOperand const * pop1 = stack[stack.size() - 1];
 			IOperand const * pop2 = stack[stack.size() - 2];
 			IOperand const * newop;
-			long double	temp = std::stold(pop2->toString());
+			long double	temp = std::stold(pop1->toString());
 			if (temp == 0)
 				throw Error::ZeroError();
-			newop = *pop1 % *pop2;
+			newop = *pop2 % *pop1;
 			delete pop1;
 			delete pop2;
 			stack.pop_back();
