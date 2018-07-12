@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 08:56:46 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 10:57:33 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/12 11:28:23 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,37 +160,28 @@ void	assert(int line, std::string cmds[4], std::vector<IOperand const *> & stack
 	IOperand const * pop = stack[stack.size() - 1];
 	(void)line;
 	(void)input;
+
 	if (stack.size() < 1)
 		throw Error::EmptyError();
 	else {
 		if (cmds[1] == "int8" && pop->getType() == 0) {
-			if (cmds[2] == pop->toString())
-				std::cout << "value matches" << std::endl;
-			else 
+			if (cmds[2] != pop->toString())
 				throw Error::AssertError();
 		}
 		else if (cmds[1] == "int16" && pop->getType() == 1) {
-			if (cmds[2] == pop->toString())
-				std::cout << "value matches" << std::endl;
-			else 
+			if (cmds[2] != pop->toString())
 				throw Error::AssertError(); 
 		}
 		else if (cmds[1] == "int32" && pop->getType() == 2) {
-			if (cmds[2] == pop->toString())
-				std::cout << "value matches" << std::endl;
-			else 
+			if (cmds[2] != pop->toString())
 				throw Error::AssertError();
 		}
 		else if (cmds[1] == "float" && pop->getType() == 3) {
-			if (cmds[2] == pop->toString())
-				std::cout << "value matches" << std::endl;
-			else 
+			if (std::stof(cmds[2]) != std::stof(pop->toString()))
 				throw Error::AssertError();
 		}
 		else if (cmds[1] == "double" && pop->getType() == 4) {
-			if (cmds[2] == pop->toString())
-				std::cout << "value matches" << std::endl;
-			else 
+			if (std::stod(cmds[2]) != std::stod(pop->toString()))
 				throw Error::AssertError();
 		}
 		else
