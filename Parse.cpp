@@ -6,15 +6,14 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:50:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/11 15:47:38 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/12 11:00:52 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parse.hpp"
 
 // return a vector of words to loop thru
-std::vector<std::string>	splitspace(std::string input)
-{
+std::vector<std::string>	splitspace(std::string input) {
 	std::string					buff;	
 	std::stringstream			ss(input);
 	std::vector<std::string>	words;
@@ -25,8 +24,7 @@ std::vector<std::string>	splitspace(std::string input)
 }
 
 // remove comments if any is found and return 0 if exit command/colon is found
-int		remove_comment(std::string & input)
-{
+int		remove_comment(std::string & input) {
 	size_t exitCol = input.find(";;");						// find exit colon
 	size_t exitCmd = input.find("exit");					// find exit cmd
 	size_t semiC = input.find(";");							// find comments
@@ -37,8 +35,7 @@ int		remove_comment(std::string & input)
 	input.erase(input.find_last_not_of('\t')+1);			//surfixing tabs
 	if (exitCmd != std::string::npos && input.size() == 4)	// check if exit cmd if found
 		return (0);
-	if (semiC != std::string::npos)
-	{
+	if (semiC != std::string::npos) {
 		if (exitCol != std::string::npos && input.size() == 2)	// check if exit colon is found
 			return (1);
 		input = input.substr(0, semiC);							// remove any comments
@@ -53,8 +50,7 @@ int		remove_comment(std::string & input)
 }
 
 // check if input options are true
-void	validate(int line, std::string & input, std::string cmds[4]) 
-{
+void	validate(int line, std::string & input, std::string cmds[4])  {
 	std::regex		reg("(push|assert) (int8|int16|int32|float|double)\\s?\\(-?[[:digit:]]+(.?[[:digit:]]+)?\\)\\B");
 	std::regex		reg_cmds("add\\b|sub\\b|mod\\b|dump\\b|div\\b|mul\\b|pop\\b|print\\b");
 	std::regex		digits("\\(-?\\d+(.?\\d+)?\\)");
@@ -65,13 +61,11 @@ void	validate(int line, std::string & input, std::string cmds[4])
 	std::transform(input.begin(), input.end(), input.begin(), ::tolower);
 	if (remove_comment(input) == 0 || remove_comment(input) == 1)
 		cmds[3] = "end";
-	else if (std::regex_match(input, reg_cmds) == true) 
-	{
+	else if (std::regex_match(input, reg_cmds) == true) {
 		cmds[0] = input;
 		cmds[3] = "reg_cmd";
 	}
-	else if (std::regex_match(input, base_match, reg) == true) 
-	{
+	else if (std::regex_match(input, base_match, reg) == true) {
 		if (std::regex_search(input, value_match, digits) == true)
 			val = (value_match[0].str()).substr(1, (value_match[0].str()).size() - 2);
 		else
@@ -90,8 +84,7 @@ void	validate(int line, std::string & input, std::string cmds[4])
 }
 
 // check if function has overflow or underflow
-void	CheckOUFlow(int line, std::string cmds[4], std::string input)
-{
+void	CheckOUFlow(int line, std::string cmds[4], std::string input) {
 	std::string			num = cmds[2];
 	std::string			func = cmds[1];
 	long double size = std::stold(num);
@@ -129,8 +122,7 @@ void	CheckOUFlow(int line, std::string cmds[4], std::string input)
 	}
 }
 
-void	CheckOverUnderFlow(eOperandType _type, long double size)
-{
+void	CheckOverUnderFlow(eOperandType _type, long double size) {
 	int		type = _type;
 
 	std::cout << "checking overflow and underflow type: " << type << std::endl;
