@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 18:02:26 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/13 09:26:05 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,38 @@ void	loop(void)  {
 		delete stack[i];
 }
 
+// create a temp.avm file
+void	loop_f_flag(void)  {
+	bool							exit = false;
+	std::vector<IOperand const *>	stack;
+	std::vector<std::string>		commands;
+	int								exitF = 0;
+
+	while (!exit) {
+		std::string in;
+		std::getline (std::cin, in);
+		remove_comment(in);
+		if (in == "exit")
+			exitF = 1;
+		if (in == ";;") {
+			if (exitF != 1) {
+				std::cout << "No exit command found!" << std::endl;
+				std::exit (EXIT_FAILURE);
+			}
+			else
+				exit = true;
+		}
+		if (in == "")
+			std::cout << "Invalid syntax" << std::endl;
+		else if (in != ";;")
+			commands.push_back(in);
+	}
+	if (exit == true)
+		create_file(commands);
+	else
+		std::cout << "Could not create file type" << std::endl;
+}
+
 // run with interactive mode, this is a bonus
 void	loop_i_flag(void)  {
 	bool					exit = false;
@@ -186,6 +218,8 @@ int		main(int ac, char **av) {
 		std::string temp = av[1];
 		if (temp.compare("-i") == 0)
 			loop_i_flag();
+		else if (temp.compare("-f") == 0)
+			loop_f_flag();
 		else
 			read_files(av, ac);
 	}
