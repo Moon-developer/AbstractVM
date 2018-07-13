@@ -49,10 +49,10 @@ exit ; needs this exit
 
 This program comes with 4 modes.
 
-### Normal mode
+### Normal mode:
 	Run abstract vm as follow and give inputs. 
 
-#### Input
+#### Input:
 
 ```
 ./avm
@@ -73,10 +73,10 @@ exit
 3
 ```
 
-###Interactive mode:
+### Interactive mode:
 	This mode executes the commands as it's given. Use -i flag
 
-####input/output:
+#### Input/Output:
 ```
 ./avm -i
 input : push int8(1)
@@ -85,10 +85,10 @@ output: 1
 input : exit
 input : ;;
 ```
-###Create File mode:
+### Create File mode:
 	Similar to normal mode but creates temp.avm file instead of executing commands
 
-####input:
+#### Input:
 ```
 ./avm -F
 push int8(1)
@@ -99,7 +99,7 @@ dump
 exit
 ;;
 ```
-####output:
+#### Output:
 ```
 cat temp.avm
 push int8(1)
@@ -110,33 +110,11 @@ dump
 exit
 ```
 
-###Run file mode:
+### Run file mode:
 	Give it files or a file and it will execute each valid file
 
-####input:
+#### Input:
 ```
 ./avm file1 file2 file3 ...
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
