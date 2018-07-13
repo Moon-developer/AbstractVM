@@ -1,15 +1,16 @@
 # AbstractVM
 WeThinkCode project to code an abstract VM.
 
-### About the project
+## About the project
 
 AbstractVM is a machine that uses a stack to compute simple arithmetic expressions.
 These arithmetic expressions are provided to the machine as basic assembly programs.
 
-#### Commands
+## Commands
 
 Abstract VM accepts the following
 The character # is replaced by a number value of your choice
+
 ```
 push int8(#)
 push int16(#)
@@ -37,21 +38,22 @@ Needs to be a .avm extension
 Can inlcude comments using ";"
 Needs an exit commands
 
-example:
+### Example:
 ```
 push int8(1) ; Anything type after the ; is a comment
 dump
 exit ; needs this exit
 ```
 
-#### How to use
+## How to use
 
 This program comes with 4 modes.
 
-Normal mode:
+###Normal mode:
 	Run abstract vm as follow and give inputs. 
 
-input:
+#### input:
+
 ```
 ./avm
 push int8(1)
@@ -62,17 +64,19 @@ dump
 exit
 ;;
 ```
-output:
+
+#### Output:
+
 ```
 2
 1
 3
 ```
 
-Interactive mode:
+###Interactive mode:
 	This mode executes the commands as it's given. Use -i flag
 
-input/output:
+####input/output:
 ```
 ./avm -i
 input : push int8(1)
@@ -81,10 +85,10 @@ output: 1
 input : exit
 input : ;;
 ```
-Create File mode:
+###Create File mode:
 	Similar to normal mode but creates temp.avm file instead of executing commands
 
-input:
+####input:
 ```
 ./avm -F
 push int8(1)
@@ -95,7 +99,7 @@ dump
 exit
 ;;
 ```
-output:
+####output:
 ```
 cat temp.avm
 push int8(1)
@@ -106,9 +110,10 @@ dump
 exit
 ```
 
-Run file mode:
+###Run file mode:
 	Give it files or a file and it will execute each valid file
 
+####input:
 ```
 ./avm file1 file2 file3 ...
 ```
