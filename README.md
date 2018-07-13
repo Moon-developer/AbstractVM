@@ -1,5 +1,5 @@
 # AbstractVM
-WeThinkCode project to code an abstract VM.
+WeThinkCode project to code an abstract VM in c++.
 
 ## About the project
 
@@ -8,7 +8,7 @@ These arithmetic expressions are provided to the machine as basic assembly progr
 
 ## Install
 
-run the following
+To install abstract VM run the following
 
 #### Input:
 ```
