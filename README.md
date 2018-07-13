@@ -9,7 +9,7 @@ These arithmetic expressions are provided to the machine as basic assembly progr
 #### Commands
 
 Abstract VM accepts the following
-
+The character # is replaced by a number value of your choice
 ```
 push int8(#)
 push int16(#)
@@ -33,9 +33,9 @@ exit
 ```
 
 Structure of a file:
-	-Needs to be a .avm extension
-	-Can inlcude comments using ";"
-	-Needs an exit commands
+Needs to be a .avm extension
+Can inlcude comments using ";"
+Needs an exit commands
 
 example:
 ```
@@ -49,7 +49,7 @@ exit ; needs this exit
 This program comes with 4 modes.
 
 Normal mode:
-	run abstract vm as follow and give inputs. 
+	Run abstract vm as follow and give inputs. 
 
 input:
 ```
@@ -70,7 +70,7 @@ output:
 ```
 
 Interactive mode:
-	this mode executes the commands as it's given. Use -i flag
+	This mode executes the commands as it's given. Use -i flag
 
 input/output:
 ```
@@ -82,7 +82,7 @@ input : exit
 input : ;;
 ```
 Create File mode:
-	similar to normal mode but creates temp.avm file instead of executing commands
+	Similar to normal mode but creates temp.avm file instead of executing commands
 
 input:
 ```
@@ -107,7 +107,8 @@ exit
 ```
 
 Run file mode:
-	give it files or a file and it will execute each valid file
+	Give it files or a file and it will execute each valid file
+
 ```
 ./avm file1 file2 file3 ...
 ```
