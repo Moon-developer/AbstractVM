@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:58:51 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/11 15:43:11 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/13 09:22:17 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int		remove_comment(std::string & input);
 void	validate(int line, std::string & input, std::string cmds[]);
 void	CheckOUFlow(int line, std::string cmds[4], std::string input);
 void	CheckOverUnderFlow(eOperandType _type, long double size);
+void	create_file(std::vector<std::string> & lines);
 
 #endif
