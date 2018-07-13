@@ -6,6 +6,17 @@ WeThinkCode project to code an abstract VM.
 AbstractVM is a machine that uses a stack to compute simple arithmetic expressions.
 These arithmetic expressions are provided to the machine as basic assembly programs.
 
+## Install
+
+run the following
+
+#### Input:
+```
+git clone https://github.com/Moondog360/AbstractVM.git 
+cd AbstractVM
+make
+```
+
 ## Commands
 
 Abstract VM accepts the following
