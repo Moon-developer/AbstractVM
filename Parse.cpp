@@ -6,11 +6,24 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:50:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 13:16:33 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/13 09:30:15 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parse.hpp"
+#include <fstream>
+#include <iostream>
+
+// on success of a valid input it creates the file
+void	create_file(std::vector<std::string> & lines) {
+	std::ofstream file;
+	file.open("temp.avm");
+	for (unsigned long index = 0; index < lines.size() - 1; index++) {
+		file << lines[index] << "\n";
+	}
+	file << "exit" << std::endl;
+	file.close();
+}
 
 // return a vector of words to loop thru
 std::vector<std::string>	splitspace(std::string input) {
