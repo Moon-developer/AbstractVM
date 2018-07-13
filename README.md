@@ -49,10 +49,10 @@ exit ; needs this exit
 
 This program comes with 4 modes.
 
-###Normal mode:
+###Normal mode
 	Run abstract vm as follow and give inputs. 
 
-#### input:
+####input
 
 ```
 ./avm
