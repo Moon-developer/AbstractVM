@@ -6,12 +6,14 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 09:28:43 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/13 09:26:05 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/13 09:35:18 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Main.hpp"
 #include <string>
+#include "Commands.hpp"
+#include <string>
+#include <fstream>
 
 // return true if exit cmd found for file
 bool	find_exit(std::string file)
