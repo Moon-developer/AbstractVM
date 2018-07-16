@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/16 07:11:44 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/16 07:43:38 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // Constructor
 Operand<T>::Operand( void ) {};
 
-// Constructor
+// Constructor that takes a string value and eOperandType type and sets it in the object.
 template<typename T>
 Operand<T>::Operand(std::string val, eOperandType type) : _type(type) {
 	long double temp = std::stold(val);
@@ -172,6 +172,7 @@ IOperand const * Operand<T>::operator/( IOperand const & rhs ) const { //Sum
 	return (op);
 }
 
+// modulo operator
 template<typename T>
 IOperand const * Operand<T>::operator%( IOperand const & rhs ) const { //Sum
 	long double		lhs_val = std::stold(this->_val);
