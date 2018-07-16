@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 15:05:15 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 10:42:09 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/16 07:10:03 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 // Nested error handling classes
 class Error {
 	public:
+		Error( void ) {};
+		~Error( void ) {};
 		class SyntaxError : public std::exception {
 			public:
 				std::string		e_msg;
