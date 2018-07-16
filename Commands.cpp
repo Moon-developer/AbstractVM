@@ -6,12 +6,13 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 08:56:46 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/13 08:58:22 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/16 07:21:25 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Commands.hpp"
 
+// combine the array of string into one string 
 std::string	com_arr(std::string list[]) {
 	std::string		result;
 	int				size = list->size();
@@ -23,6 +24,7 @@ std::string	com_arr(std::string list[]) {
 	return (result);
 }
 
+// run the correct arithmetic according to what was given
 void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, int line) {
 	if (cmds[0] == "add") {
 		if (stack.size() < 2)
@@ -131,6 +133,7 @@ void	run_reg_cmds(std::string cmds[4], std::vector<IOperand const *> & stack, in
 	}
 }
 
+// pushes creates and pushes the correct obj with given values into a vector stack.
 void	push(int line, std::string cmds[4], std::vector<IOperand const *> & stack, std::string input) {
 	CheckOUFlow(line, cmds, input);
 	Factory	f;
@@ -156,6 +159,7 @@ void	push(int line, std::string cmds[4], std::vector<IOperand const *> & stack, 
 	}
 }
 
+// checks that the last value in the stack matchs the value given
 void	assert(int line, std::string cmds[4], std::vector<IOperand const *> & stack, std::string input) {
 	IOperand const * pop = stack[stack.size() - 1];
 	(void)line;
