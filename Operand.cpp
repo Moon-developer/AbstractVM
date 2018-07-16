@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/16 07:43:38 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/16 07:52:13 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <cmath>
 
 // Constructor
+template<typename T>
 Operand<T>::Operand( void ) {};
 
 // Constructor that takes a string value and eOperandType type and sets it in the object.
