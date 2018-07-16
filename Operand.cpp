@@ -6,7 +6,7 @@
 /*   By: mafernan   <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 13/38/57 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/12 16:27:32 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/16 07:11:44 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <cfloat>
 #include <cmath>
 
+// Constructor
+Operand<T>::Operand( void ) {};
 
 // Constructor
 template<typename T>
@@ -24,6 +26,7 @@ Operand<T>::Operand(std::string val, eOperandType type) : _type(type) {
 	T new_val = static_cast<T>(temp);
 	_val = std::to_string(static_cast<T>(new_val));
 };
+
 // copy
 template<typename T>
 Operand<T>::Operand( Operand const & src ) {
