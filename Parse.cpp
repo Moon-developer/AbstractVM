@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 14:50:39 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/16 07:10:10 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/16 07:44:20 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	CheckOUFlow(int line, std::string cmds[4], std::string input) {
 	}
 }
 
+// does the same as the top function but using different values passed to it.
 void	CheckOverUnderFlow(eOperandType _type, long double size) {
 	int		type = _type;
 
