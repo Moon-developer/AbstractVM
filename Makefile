@@ -6,17 +6,17 @@
 #    By: nfruneau <nfruneau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 15:56:35 by nfruneau          #+#    #+#              #
-#    Updated: 2018/07/16 07:09:53 by mafernan         ###   ########.fr        #
+#    Updated: 2018/07/17 08:54:37 by mafernan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 COM = clang++
 
-FLAGS = -std=c++1z -Wall -Werror -Wextra
+FLAGS = -std=c++11 -Wall -Werror -Wextra
 
 NAME = avm
 
-SRC = Main.cpp Parse.cpp Commands.cpp Factory.cpp
+SRC = Main.cpp Parse.cpp Error.cpp Commands.cpp Factory.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
