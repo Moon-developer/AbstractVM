@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 15:05:15 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/16 07:10:03 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/17 09:24:07 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,80 +21,51 @@ class Error {
 		class SyntaxError : public std::exception {
 			public:
 				std::string		e_msg;
-				SyntaxError(const std::string& line, const std::string& input) {
-					e_msg = std::string("Syntax ERROR on line ["+line+"] "+input);
-				}
-				virtual const char* what() const throw() {
-						return e_msg.c_str();
-				}
+				SyntaxError(const std::string& line, const std::string& input);
+				virtual const char* what() const throw();
 		};
 		class OverflowError : public std::exception {
 			public:
 				std::string		e_msg;
-				OverflowError(const std::string& line, const std::string& input) {
-					e_msg = std::string("Overflow ERROR on line ["+line+"] "+input);
-				}
-				virtual const char* what() const throw() {
-						return e_msg.c_str();
-				}
+				OverflowError(const std::string& line, const std::string& input);
+				virtual const char* what() const throw();
 		};
 		class UnderflowError : public std::exception {
 			public:
 				std::string		e_msg;
-				UnderflowError(const std::string& line, const std::string& input) {
-					e_msg = std::string("Underflow ERROR on line ["+line+"] "+input);
-				}
-				virtual const char* what() const throw() {
-						return e_msg.c_str();
-				}
+				UnderflowError(const std::string& line, const std::string& input);
+				virtual const char* what() const throw();
 		};
 		class InstructionError : public std::exception {
 			public:
-				virtual const char* what() const throw() {
-						return "Unknown Instruction given.";
-				}
+				virtual const char* what() const throw();
 		};
 		class EmptyError : public std::exception {
 			public:
-				virtual const char* what() const throw() {
-						return "Stack size ERROR: Attempted command on empty stack.";
-				}
+				virtual const char* what() const throw();
 		};
 		class ZeroError : public std::exception {
 			public:
-				virtual const char* what() const throw() {
-						return "Operator ERROR: Can't mod/div by zero!";
-				}
+				virtual const char* what() const throw();
 		};
 		class ExitError : public std::exception {
 			public:
-				virtual const char* what() const throw() {
-						return "File Format ERROR: No exit command found!";
-				}
+				virtual const char* what() const throw();
 		};
 		class AssertError : public std::exception {
 			public:
-				virtual const char* what() const throw() {
-						return "Assert instruction returned false.";
-				}
+				virtual const char* what() const throw();
 		};
 		class StackSizeError : public std::exception {
 			public:
-				virtual const char* what() const throw() {
-						return "Stack size less than two to use command!";
-				}
+				virtual const char* what() const throw();
 		};
 		class NotInt8 : public std::exception {
 			public:
 				std::string		e_msg;
-				 NotInt8(const std::string& line, const std::string& input) {
-				 	e_msg = std::string("ASCII Convertion ERROR on line ["+line+"] "+input);
-				 }
-				virtual const char* what() const throw() {
-						return e_msg.c_str();
-				}
+				NotInt8(const std::string& line, const std::string& input);
+				virtual const char* what() const throw();
 		};
-		virtual const char* what() const throw() { 
-			return "Unknown Error!"; 
-		}
+		virtual const char* what() const throw(); 
 };
+
