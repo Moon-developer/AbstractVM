@@ -6,7 +6,7 @@
 /*   By: mafernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 08:56:46 by mafernan          #+#    #+#             */
-/*   Updated: 2018/07/16 07:21:25 by mafernan         ###   ########.fr       */
+/*   Updated: 2018/07/18 15:02:22 by mafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,13 +161,13 @@ void	push(int line, std::string cmds[4], std::vector<IOperand const *> & stack, 
 
 // checks that the last value in the stack matchs the value given
 void	assert(int line, std::string cmds[4], std::vector<IOperand const *> & stack, std::string input) {
-	IOperand const * pop = stack[stack.size() - 1];
 	(void)line;
 	(void)input;
 
 	if (stack.size() < 1)
 		throw Error::EmptyError();
 	else {
+		IOperand const * pop = stack[stack.size() - 1];
 		if (cmds[1] == "int8" && pop->getType() == 0) {
 			if (cmds[2] != pop->toString())
 				throw Error::AssertError();
